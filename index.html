@@ -1,11 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="shortcut icon" href="Semana 1 - Exercícios/img/icons/brain.png" type="image/x-icon" /> <!-- fav icon-->
+    <link rel="stylesheet" type="text/css" href="Semana 1 - Exercícios/css/estilo.css">
+    <title>Exercício 1</title>
 </head>
+
 <body>
-    
+    <section class="painel">
+        <h1 class="titulo">Contador de vogais</h1>
+        <div class="icon">
+            <img src="Semana 1 - Exercícios/img/animation/brain.gif" style="width: 150px;" alt="Ícone Cérebro">
+        </div>
+        <p class="txt-welcome">Bem-vindo(a) ao nosso contador de vogais online! Aqui você pode contar quantas vogais
+            existem em qualquer texto que inserir. Experimente agora!</p>
+        <form class="form-palavra" onsubmit="enviarFormulario(); return false;">
+
+            <div>
+                <label>Insira uma palavra: </label>
+                <input type="text" id="palavra" name="palavra" placeholder="Ex: pudim">
+            </div>
+
+            <div class="resultado">
+                <p>Número de vogais: <span id="contagem" data-id="contagem"></span></p>
+            </div>
+
+            <div class="bt-enviar">
+                <button type="submit" id="button">Enviar</button>
+            </div>
+
+        </form>
+    </section>
 </body>
+
+<script src="Semana 1 - Exercícios/dist/exercicio-1.js"></script>
+
 </html>
