@@ -17,7 +17,6 @@ function retornarVogais(palavra) {
             contagem++;
         }
     }
-    console.log("Contagem: ", contagem);
     return contagem;
 }
 /**
@@ -40,5 +39,5 @@ function enviarFormulario() {
     }
     return palavra;
 }
-retornarVogais(palavra);
+console.log("Contagem de vogais: " + retornarVogais(palavra));
 console.log("Palavra: ", palavra);

@@ -18,7 +18,6 @@ function retornarVogais(palavra: string): number {
             contagem++;
         }
     }
-    console.log("Contagem: ", contagem)
     return contagem;
 }
 
@@ -45,5 +44,5 @@ function enviarFormulario(): string {
     return palavra;
 }
 
-retornarVogais(palavra);
+console.log("Contagem de vogais: " + retornarVogais(palavra));
 console.log("Palavra: ", palavra);
