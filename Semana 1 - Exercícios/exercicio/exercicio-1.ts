@@ -2,7 +2,7 @@
 
 // a) Dar um exemplo de uso com uma palavra recebida via parâmetro da função.
 let palavra = 'orion'; // --> a variável pode receber valor via parâmetro ou armazená-lo via input
-const vogais: string[] = ["a", "e", "i", "o", "u"];
+const vogais: string[] = ["a", "á", "à", "â", "ã", "e", "é", "ê", "i", "í", "o", "ó", "ô", "õ", "u", "ú", "ü"];
 
 /**
  *  Função responsável por receber uma palavra, contar e retornar o número de vogais existentes
@@ -18,11 +18,16 @@ function retornarVogais(palavra: string): number {
             contagem++;
         }
     }
+    console.log("Contagem: ", contagem)
     return contagem;
 }
 
-// b) Dar um exemplo de uso com uma palavra recebida via input no formulário.
-function enviarFormulario() {
+/**
+ * Função responsável por receber a variável 'palavra' e lidar com o formulário de contagem de vogais,
+ * fazendo a manipulação no DOM.
+ * @returns A palavra inserida pelo usuário
+ */
+function enviarFormulario(): string {
     // busca pelos elementos no HTML com base no seu ID
     let palavraInput = document.getElementById("palavra") as HTMLInputElement;
     let contagemInput = document.getElementById("contagem");
@@ -36,6 +41,9 @@ function enviarFormulario() {
         // atualiza o elemento de contagem com o novo valor (quantidade de vogais)
         contagemInput.innerHTML = contagem.toString();
     }
+
+    return palavra;
 }
 
 retornarVogais(palavra);
+console.log("Palavra: ", palavra);
