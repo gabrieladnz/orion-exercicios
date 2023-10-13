@@ -2,8 +2,8 @@
 
 <p align="justify">
 
-1 - Criar uma função que retorne a quantidade de vogais da palavra passada.
-a) Dar um exemplo de uso com uma palavra recebida via parâmetro da função.
+1 - Criar uma função que retorne a quantidade de vogais da palavra passada.<br><br>
+a) Dar um exemplo de uso com uma palavra recebida via parâmetro da função.<br>
 b) Dar um exemplo de uso com uma palavra recebida via input no formulário.
 
 2 - Dado o array:
