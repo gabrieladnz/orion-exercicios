@@ -1,8 +1,11 @@
+import { Cientistas } from "../exercicio/exercicio-2";
+
 /**
- * Armazenei o array dentro da const lista e exportei a função para ser chamada em outros componentes sempre que precisar ser utilizada.
- * @param id o id é o parâmetro necessário que a função recebe para retornar os dados da lista
+ * Filtra uma lista de objetos com base no 'id' fornecido.
+ * @param id 'id' usado para filtrar a lista.
+ * @param lista a lista de objetos a ser filtrada.
+ * @returns um array de objetos da lista original que têm o 'id' correspondente.
  */
-export function consultarLista(id: number, lista: any[]) {
-    const resultado = lista.filter(objeto => objeto.id === id);
-    return resultado;
+export function consultarLista(id: number, lista: Cientistas[]): Cientistas[] {
+    return lista.filter(objeto => objeto.id === id);
 }

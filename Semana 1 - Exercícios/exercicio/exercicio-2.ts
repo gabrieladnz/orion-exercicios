@@ -5,13 +5,14 @@ let textoNome: string = "";
 let textoBio: string = "";
 const mensagemErro: string = "Objeto não encontrado."
 
-const lista = [
+const lista: Cientistas[] = [
     { "id": 1, "name": "Ada Lovelace", "bio": "Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina" },
     { "id": 2, "name": "Alan Turing", "bio": "Alan Turing foi um matemático, cientista da computação, lógico, criptoanalista, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificial" },
     { "id": 3, "name": "Nikola Tesla", "bio": "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada." },
-    { "id": 4, "name": "Nicolau Copérnico", "bio": "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar." }];
+    { "id": 4, "name": "Nicolau Copérnico", "bio": "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar." }
+];
 
-interface Cientistas {
+export interface Cientistas {
     id: number;
     name: string;
     bio: string;
@@ -27,9 +28,8 @@ interface Cientistas {
 function retornarBio(idLista: number): string {
     // Consulta a lista completa usando o id passado e armazena o resultado em 'resultado'
     const listaFiltrada = consultarLista(idLista, lista);
-    const retornoFiltrado = (listaFiltrada.length > 0) ? listaFiltrada[0] : null;
     // Verifica se o elemento procurado existe na lista
-    return retornoFiltrado?.bio || mensagemErro;
+    return listaFiltrada[0]?.bio || mensagemErro;
 }
 
 /**
@@ -39,8 +39,7 @@ function retornarBio(idLista: number): string {
  */
 function retornarNome(idLista: number): string {
     const listaFiltrada = consultarLista(idLista, lista);
-    const retornoFiltrado = (listaFiltrada.length > 0) ? listaFiltrada[0] : null;
-    return retornoFiltrado?.name || mensagemErro;
+    return listaFiltrada[0]?.name || mensagemErro;
 }
 
 /**
@@ -51,19 +50,18 @@ function retornarNome(idLista: number): string {
  * @param textoBio novo texto para a biografia, se fornecida.
  * @returns retorna o objeto atualizado com os campos de nome e biografia atualizados, se existir. Caso contrário, retorna null ou uma mensagem de erro.
  */
-function alterarLista(idLista: number, lista: any[], textoNome?: string, textoBio?: string): Cientistas[] {
+function alterarLista(idLista: number, lista: Cientistas[], textoNome?: string, textoBio?: string): Cientistas[] {
     const listaFiltrada = consultarLista(idLista, lista);
-    const retornoFiltrado = (listaFiltrada.length > 0) ? listaFiltrada[0] : null;
 
-    if (retornoFiltrado) {
+    if (listaFiltrada) {
         // verifica se os textos foram fornecidos antes de atualizar o campo
-        (textoNome) ? retornoFiltrado.name = textoNome : retornoFiltrado;
-        (textoBio) ? retornoFiltrado.bio = textoBio : retornoFiltrado;
+        (textoNome) ? listaFiltrada[0].name = textoNome : listaFiltrada;
+        (textoBio) ? listaFiltrada[0].bio = textoBio : listaFiltrada;
     } else {
         mensagemErro;
     }
 
-    return retornoFiltrado;
+    return listaFiltrada;
 }
 
 /**
@@ -72,16 +70,15 @@ function alterarLista(idLista: number, lista: any[], textoNome?: string, textoBi
  * @param lista lista de objetos na qual a operação será realizada.
  * @returns retorna a lista de objetos atualizada após a remoção da biografia do objeto correspondente ao 'id', se existir. Caso contrário, retorna null ou uma mensagem de erro.
  */
-function apagarItemLista(idLista: number, lista: any[]): Cientistas[] {
+function apagarItemLista(idLista: number, lista: Cientistas[]): Cientistas[] {
     const listaFiltrada = consultarLista(idLista, lista);
-    const retornoFiltrado = (listaFiltrada.length > 0) ? listaFiltrada[0] : null;
 
-    if (retornoFiltrado) {
-        delete retornoFiltrado.bio;
+    if (listaFiltrada) {
+        listaFiltrada[0].bio = '';
     } else {
         mensagemErro;
     }
-    return retornoFiltrado;
+    return listaFiltrada;
 }
 
 console.log("Bio - Imperativo: ", retornarBio(idLista));
@@ -97,11 +94,9 @@ console.log("Item deletado -  Imperativo: ", apagarItemLista(idLista, lista));
  * @param lista lista de itens onde a consulta foi realizada.
  * @returns retorna a biografia do objeto correspondente ao 'id', se existir. Caso contrário, retorna a mensagem de erro.
  */
-function funcionalRetornarBio(idLista: number, lista: any[]): string {
+function funcionalRetornarBio(idLista: number, lista: Cientistas[]): string {
     const listaFiltrada = consultarLista(idLista, lista);
-    const retornoFiltrado = listaFiltrada.find(objeto => objeto.id === idLista);
-
-    return retornoFiltrado?.bio || mensagemErro;
+    return listaFiltrada[0]?.bio || mensagemErro;
 }
 
 /**
@@ -110,11 +105,9 @@ function funcionalRetornarBio(idLista: number, lista: any[]): string {
  * @param lista lista de itens onde a consulta foi realizada.
  * @returns retorna o 'nome' do objeto correspondente ao 'id', se existir. Caso contrário, retorna a mensagem de erro.
  */
-function funcionalRetornarNome(idLista: number, lista: any[]): string {
+function funcionalRetornarNome(idLista: number, lista: Cientistas[]): string {
     const listaFiltrada = consultarLista(idLista, lista);
-    const retornoFiltrado = listaFiltrada.find(objeto => objeto.id === idLista);
-
-    return retornoFiltrado?.name || mensagemErro;
+    return listaFiltrada[0]?.name || mensagemErro;
 }
 
 /**
@@ -125,14 +118,13 @@ function funcionalRetornarNome(idLista: number, lista: any[]): string {
  * @param textoBio o novo texto para 'bio', se fornecido. Caso não seja, retorna o já existente.
  * @returns retorna a lista alterada após as modificações
  */
-function funcionalAlterarLista(idLista: number, lista: any[], textoNome?: string, textoBio?: string): Cientistas[] {
+function funcionalAlterarLista(idLista: number, lista: Cientistas[], textoNome?: string, textoBio?: string): Cientistas[] {
     const listaFiltrada = consultarLista(idLista, lista);
-    const retornoFiltrado = listaFiltrada.find(objeto => objeto.id === idLista);
 
     const listaAlterar = listaFiltrada.map(objeto => {
-        if (retornoFiltrado) {
-            (textoNome) ? retornoFiltrado.name = textoNome : retornoFiltrado;
-            (textoBio) ? retornoFiltrado.bio = textoBio : retornoFiltrado;
+        if (listaFiltrada) {
+            (textoNome) ? listaFiltrada[0].name = textoNome : listaFiltrada;
+            (textoBio) ? listaFiltrada[0].bio = textoBio : listaFiltrada;
         }
         return objeto;
     });
@@ -145,13 +137,11 @@ function funcionalAlterarLista(idLista: number, lista: any[], textoNome?: string
  * @param lista lista de objetos onde o item será removido.
  * @returns retorna a lista atualizada após a remoção do item correspondente ao id.
  */
-function funcionalApagarItemLista(idLista: number, lista: any[]): Cientistas[] {
+function funcionalApagarItemLista(idLista: number, lista: Cientistas[]): Cientistas[] {
     const listaFiltrada = consultarLista(idLista, lista);
-    const retornoFiltrado = listaFiltrada.find(objeto => objeto.id === idLista);
 
-    if (retornoFiltrado) {
+    if (listaFiltrada) {
         return lista.filter(itemDeletar => itemDeletar.id !== idLista);
-        // return retornoFiltrado.name;
     } else {
         return lista;
     }
