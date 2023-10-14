@@ -54,17 +54,15 @@
             </div>
 
             <div id="divNome" style="display: none;">
-                Cientista: <label id="nomeCientista"></label>
+                Cientista: <strong><label id="nomeCientista"></label></strong>
             </div>
 
             <div id="divBiografia" style="display: none;">Biografia:
-                <label id="biografia"></label>
+                <strong><label id="biografia"></label></strong>
             </div>
-            
             <div>
                 <button type="button" id="bt-consulta" onclick="mostrarInfo()">Consultar</button>
             </div>
-
             <section class="section-alteracao">
                 <div class="alterar-atributo">
                     <label>Alterar informação: </label>
@@ -85,7 +83,9 @@
                 </div>
 
                 <div id="div-infoAlterada" style="display: none;">
-                    <label id="infoAlterada">Informações alteradas: </label>
+                    <strong>
+                        <label id="infoAlterada">Informações alteradas: </label>
+                    </strong>
                 </div>
 
                 <div>
@@ -102,11 +102,12 @@
                         <option value="2">Biografia</option>
                     </select>
                 </div>
-                
-                <div id="div-infoExcluida" style="display: none;">
-                    <label id="infoExcluida">Informações excluídas: </label>
-                </div>
 
+                <div id="div-infoExcluida" style="display: none;">
+                    <strong>
+                        <label id="infoExcluida">Informações excluídas: </label>
+                    </strong>
+                </div>
                 <div>
                     <button id="bt-excluir" type="button" onclick="excluirAtributo()">Excluir</button>
                 </div>
