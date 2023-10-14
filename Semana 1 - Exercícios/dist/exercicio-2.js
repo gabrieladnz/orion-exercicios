@@ -233,36 +233,17 @@ function alterarAtributo() {
 }
 /**
  * Função responsável por excluir um atributo selecionado pelo usuário da lista de Cientistas.
- * @returns array de objetos com os atributos mantidos e o excluído.
+ * @returns array de objetos com os atributos atualizados
  */
 function excluirAtributo() {
     // Obtém o elemento de seleção de cientistas e de opção de exclusão do HTML
     const idCientista = document.getElementById("cientistas");
-    const opcaoDeletar = document.getElementById("opcaoDeletar");
     const id = parseInt(idCientista.value);
-    // Chama a função para excluir um item da lista com base no ID e mantém a lista atualizada
-    const deletar = apagarItemLista(id, lista);
-    // Verifica a opção de exclusão selecionada e executa a exclusão apropriada
-    if (opcaoDeletar) {
-        switch (parseInt(opcaoDeletar.value)) {
-            case 1:
-                deletar[0].name = '';
-                break;
-            case 2:
-                deletar[0].bio = '';
-                break;
-            default:
-                break;
-        }
-    }
-    // Obtém os elementos do HTML relacionados às informações excluídas e atualiza
-    const infoExcluida = document.getElementById("infoExcluida");
-    if (infoExcluida)
-        infoExcluida.innerHTML = JSON.stringify(deletar);
-    const divInfoExcluida = document.getElementById("div-infoExcluida");
-    if (divInfoExcluida)
-        divInfoExcluida.style.display = "block";
-    return deletar;
+    // Chama a função para excluir um objeto com base no ID e mantém a lista atualizada
+    const listaAtualizada = funcionalApagarItemLista(id, lista);
+    idCientista.remove(idCientista.selectedIndex);
+    limparElementos();
+    return listaAtualizada;
 }
 /**
  * Função responsável pelo elemtno de scrolling na tela
@@ -270,4 +251,14 @@ function excluirAtributo() {
 function scrollToSection() {
     var section = document.querySelector('.section-leitura');
     section.scrollIntoView({ behavior: 'smooth' });
+}
+function limparElementos() {
+    const nomeCientista = document.getElementById("nomeCientista");
+    const biografia = document.getElementById("biografia");
+    const divNome = document.getElementById("divNome");
+    const divBiografia = document.getElementById("divBiografia");
+    divNome.style.display = "none";
+    divBiografia.style.display = "none";
+    nomeCientista.innerHTML = '';
+    biografia.innerHTML = '';
 }

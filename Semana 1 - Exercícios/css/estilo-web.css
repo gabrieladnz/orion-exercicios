@@ -101,6 +101,15 @@ aside {
     text-align: justify;
 }
 
+#bt-excluir {
+    margin-left: 1em;
+    margin-top: 1em;
+}
+
+#bt-consulta {
+    margin-top: 1em;
+}
+
 #divNome,
 #divBiografia,
 #inputsNome,
