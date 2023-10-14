@@ -4,38 +4,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="Semana 1 - Exercícios/img/icons/brain.png" type="image/x-icon" /> <!-- fav icon-->
-    <link rel="stylesheet" type="text/css" href="Semana 1 - Exercícios/css/estilo.css">
-    <title>Exercício 1</title>
+    <link rel="shortcut icon" href="Semana 1 - Exercícios/img/icons/science.png" type="image/x-icon" /> <!-- fav icon-->
+    <link rel="stylesheet" type="text/css" href="Semana 1 - Exercícios/css/estilo-web.css">
+    <title>ID Genius</title>
 </head>
 
 <body>
-    <section class="painel">
-        <h1 class="titulo">Contador de vogais</h1>
-        <div class="icon">
-            <img src="Semana 1 - Exercícios/img/animation/brain.gif" style="width: 150px;" alt="Ícone Cérebro">
-        </div>
-        <p class="txt-welcome">Bem-vindo(a) ao nosso contador de vogais online! Aqui você pode contar quantas vogais
-            existem em qualquer texto que inserir. Experimente agora!</p>
-        <form class="form-palavra" onsubmit="enviarFormulario(); return false;">
+    <header class="painel">
+        <h1 class="titulo" id="meuTitulo">ID Genius<p id="com">.com</p>
+        </h1>
+        <p class="txt-welcome">Bem-vindo (a) ao ID Genius - sua plataforma interativa para explorar o fascinante mundo
+            da
+            ciência através das vidas inspiradoras de cientistas renomados. Aqui, você pode mergulhar em uma jornada
+            intelectual emocionante ao escolher um número e desvendar os segredos por trás dos nomes que moldaram a
+            história da humanidade.</p>
 
+        <button onclick="scrollToSection()" class="bt-scroll">
+            <img src="Semana 1 - Exercícios/img/icons/lampada.png" style="width: 60px;">
+        </button>
+    </header>
+    <aside>
+        <section class="section-imagem">
+            <img style="width: 600px;" src="Semana 1 - Exercícios/img/animation/learning.png">
+        </section>
+
+        <section class="section-leitura">
+            <div class="txt-form">
+                <h3>Escolha um número e descubra um cientista!</h3>
+            </div>
+            <div class="selecionar-cientista">
+                <label for="cientistas">Selecionar número: </label>
+                <select id="cientistas">
+                    <option value="0">Selecione</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+
+            <div class="selecionar-retorno">
+                <label>O que você deseja saber? </label>
+                <select id="opcoes">
+                    <option value="0">Selecione</option>
+                    <option value="1">Nome</option>
+                    <option value="2">Biografia</option>
+                    <option value="3">Ambos</option>
+                </select>
+            </div>
+
+            <div id="divNome" style="display: none;">
+                Cientista: <label id="nomeCientista"></label>
+            </div>
+
+            <div id="divBiografia" style="display: none;">Biografia:
+                <label id="biografia"></label>
+            </div>
+            
             <div>
-                <label>Insira uma palavra: </label>
-                <input type="text" id="palavra" name="palavra" placeholder="Ex: pudim">
+                <button type="button" id="bt-consulta" onclick="mostrarInfo()">Consultar</button>
             </div>
 
-            <div class="resultado">
-                <p>Número de vogais: <span id="contagem" data-id="contagem"></span></p>
-            </div>
+            <section class="section-alteracao">
+                <div class="alterar-atributo">
+                    <label>Alterar informação: </label>
+                    <select id="opcaoEditar" onchange="mostrarInput()">
+                        <option value="0">Selecione</option>
+                        <option value="1">Nome</option>
+                        <option value="2">Biografia</option>
+                        <option value="3">Ambos</option>
+                    </select>
+                </div>
+                <div id="inputsNome" style="display: none;">
+                    <label for="novoNome">Novo nome: </label>
+                    <input type="text" id="novoNome">
+                </div>
+                <div id="inputsBio" style="display: none;">
+                    <label for="novaBiografia">Nova biografia: </label>
+                    <input type="text" id="novaBiografia">
+                </div>
 
-            <div class="bt-enviar">
-                <button type="submit" id="button">Enviar</button>
-            </div>
+                <div id="div-infoAlterada" style="display: none;">
+                    <label id="infoAlterada">Informações alteradas: </label>
+                </div>
 
-        </form>
-    </section>
+                <div>
+                    <button id="bt-alterar" type="button" onclick="alterarAtributo()">Alterar</button>
+                </div>
+            </section>
+
+            <section class="section-deletar">
+                <div class="deletar-atributo">
+                    <label>Excluir informação: </label>
+                    <select id="opcaoDeletar">
+                        <option value="0">Selecione</option>
+                        <option value="1">Nome</option>
+                        <option value="2">Biografia</option>
+                    </select>
+                </div>
+                
+                <div id="div-infoExcluida" style="display: none;">
+                    <label id="infoExcluida">Informações excluídas: </label>
+                </div>
+
+                <div>
+                    <button id="bt-excluir" type="button" onclick="excluirAtributo()">Excluir</button>
+                </div>
+            </section>
+        </section>
+    </aside>
 </body>
-
-<script src="Semana 1 - Exercícios/dist/exercicio-1.js"></script>
+<script src="Semana 1 - Exercícios/dist/exercicio-2.js"></script>
 
 </html>

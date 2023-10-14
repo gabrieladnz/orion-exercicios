@@ -1,5 +1,3 @@
-import { consultarLista } from "../request/request-service";
-
 let idLista: number = 3; // --> a variável pode receber valor via parâmetro ou via input
 let textoNome: string = "";
 let textoBio: string = "";
@@ -12,10 +10,20 @@ const lista: Cientistas[] = [
     { "id": 4, "name": "Nicolau Copérnico", "bio": "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar." }
 ];
 
-export interface Cientistas {
+interface Cientistas {
     id: number;
     name: string;
     bio: string;
+}
+
+/**
+ * Filtra uma lista de objetos com base no 'id' fornecido.
+ * @param id 'id' usado para filtrar a lista.
+ * @param lista a lista de objetos a ser filtrada.
+ * @returns um array de objetos da lista original que têm o 'id' correspondente.
+ */
+function consultarLista(id: number, lista: Cientistas[]): Cientistas[] {
+    return lista.filter(objeto => objeto.id === id);
 }
 
 // ------------------------------- Paradigma imperativo --------------------------------
@@ -152,3 +160,147 @@ console.log("Bio - Funcional: ", funcionalRetornarBio(idLista, lista));
 console.log("Nome - Funcional: ", funcionalRetornarNome(idLista, lista));
 console.log("Alterar lista - Funcional: ", funcionalAlterarLista(idLista, lista, textoNome, textoBio));
 console.log("Item deletado - Funcional: ", funcionalApagarItemLista(idLista, lista));
+
+/**
+ * Exibe as informações com base na opção selecionada para consulta
+ */
+function mostrarInfo(): void {
+    const select: HTMLSelectElement | null = document.getElementById("cientistas") as HTMLSelectElement;
+    const nomeSelect: HTMLElement | null = document.getElementById("nomeCientista");
+    const bioSelect: HTMLElement | null = document.getElementById("biografia");
+    const opcaoSelect: HTMLSelectElement | null = document.getElementById("opcoes") as HTMLSelectElement;
+    const divNome: HTMLDivElement | null = document.getElementById("divNome") as HTMLDivElement;
+    const divBiografia: HTMLDivElement | null = document.getElementById("divBiografia") as HTMLDivElement;
+
+    if (bioSelect && nomeSelect && select && opcaoSelect) {
+        const idSelecionado: number = parseInt(select.value);
+        const opcaoSelecionada: number = parseInt(opcaoSelect.value);
+
+        const nome: string = retornarNome(idSelecionado);
+        const bio: string = retornarBio(idSelecionado);
+
+        switch (opcaoSelecionada) {
+            case 1:
+                nomeSelect.innerHTML = nome.toString();
+                divNome.style.display = "block";
+                divBiografia.style.display = "none";
+                break;
+            case 2:
+                bioSelect.innerHTML = bio.toString();
+                divBiografia.style.display = "block";
+                divNome.style.display = "none";
+                break;
+            case 3:
+                nomeSelect.innerHTML = nome.toString();
+                bioSelect.innerHTML = bio.toString();
+                divNome.style.display = "block";
+                divBiografia.style.display = "block";
+                break;
+            default:
+                nomeSelect.innerHTML = '';
+                bioSelect.innerHTML = '';
+                divNome.style.display = "none";
+                divBiografia.style.display = "none";
+        }
+    }
+}
+
+/**
+ * Função responsável por exibir ou ocultar os inputs baseado na opção selecionada
+ */
+function mostrarInput(): void {
+    const opcaoEditar: HTMLSelectElement | null = document.getElementById("opcaoEditar") as HTMLSelectElement;
+    const inputNomeDiv: HTMLDivElement | null = document.getElementById("inputsNome") as HTMLDivElement;
+    const inputBioDiv: HTMLDivElement | null = document.getElementById("inputsBio") as HTMLDivElement;
+
+    const selecionarEdicao: number = parseInt(opcaoEditar.value);
+
+    switch (selecionarEdicao) {
+        case 1:
+            // Mostra apenas o input de nome
+            inputNomeDiv.style.display = "block";
+            inputBioDiv.style.display = "none";
+            break;
+        case 2:
+            // Mostra apenas o input de biografia
+            inputBioDiv.style.display = "block";
+            inputNomeDiv.style.display = "none";
+            break;
+        case 3:
+            // Mostra ambos os inputs
+            inputNomeDiv.style.display = "block";
+            inputBioDiv.style.display = "block";
+            break;
+        default:
+            // Oculta todos os inputs
+            inputNomeDiv.style.display = "none";
+            inputBioDiv.style.display = "none";
+    }
+}
+
+/**
+ * Função responsável por alterar um atributo selecionado a partir do ID selecionado.
+ * @returns um array de objetos com os atributos alterados.
+ */
+function alterarAtributo(): Cientistas[] {
+    const idCientista: HTMLSelectElement | null = document.getElementById("cientistas") as HTMLSelectElement;
+    const inputsNome: HTMLInputElement | null = document.getElementById("novoNome") as HTMLInputElement;
+    const inputsBio: HTMLInputElement | null = document.getElementById("novaBiografia") as HTMLInputElement;
+
+    const id: number = parseInt(idCientista.value);
+
+    const alterar: Cientistas[] = alterarLista(id, lista, inputsNome.value, inputsBio.value);
+
+    const infoAlterada: HTMLElement | null = document.getElementById("infoAlterada");
+    if (infoAlterada) infoAlterada.innerHTML = JSON.stringify(alterar);
+
+    const divInfoAlterada: HTMLDivElement | null = document.getElementById("div-infoAlterada") as HTMLDivElement;
+    if (divInfoAlterada) divInfoAlterada.style.display = "block";
+
+    return alterar;
+}
+
+/**
+ * Função responsável por excluir um atributo selecionado pelo usuário da lista de Cientistas.
+ * @returns array de objetos com os atributos mantidos e o excluído.
+ */
+function excluirAtributo(): Cientistas[] {
+    // Obtém o elemento de seleção de cientistas e de opção de exclusão do HTML
+    const idCientista: HTMLSelectElement | null = document.getElementById("cientistas") as HTMLSelectElement;
+    const opcaoDeletar: HTMLSelectElement | null = document.getElementById("opcaoDeletar") as HTMLSelectElement;
+    const id: number = parseInt(idCientista.value);
+
+    // Chama a função para excluir um item da lista com base no ID e mantém a lista atualizada
+    const deletar: Cientistas[] = apagarItemLista(id, lista);
+
+    // Verifica a opção de exclusão selecionada e executa a exclusão apropriada
+    if (opcaoDeletar) {
+        switch (parseInt(opcaoDeletar.value)) {
+            case 1:
+                deletar[0].name = '';
+                break;
+            case 2:
+                deletar[0].bio = '';
+                break;
+            default:
+                break;
+        }
+    }
+
+    // Obtém os elementos do HTML relacionados às informações excluídas e atualiza
+    const infoExcluida: HTMLElement | null = document.getElementById("infoExcluida");
+    if (infoExcluida) infoExcluida.innerHTML = JSON.stringify(deletar);
+
+    const divInfoExcluida: HTMLDivElement | null = document.getElementById("div-infoExcluida") as HTMLDivElement;
+    if (divInfoExcluida) divInfoExcluida.style.display = "block";
+
+    return deletar;
+}
+
+/**
+ * Função responsável pelo elemtno de scrolling na tela
+ */
+function scrollToSection(): void {
+    var section = document.querySelector('.section-leitura') as HTMLElement;
+    section.scrollIntoView({ behavior: 'smooth' });
+}
