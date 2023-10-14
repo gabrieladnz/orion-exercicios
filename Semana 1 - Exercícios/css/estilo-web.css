@@ -13,7 +13,7 @@ body {
 
     align-items: center;
     flex-direction: column;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .painel {
@@ -48,6 +48,14 @@ body {
         blink-caret .75s step-end infinite;
 }
 
+.txt-form {
+    text-align: center;
+}
+
+.txt-form h3 {
+    font-size: 23px;
+}
+
 
 #com {
     color: #7a9ebf;
@@ -65,7 +73,7 @@ body {
 aside {
     display: flex;
     align-items: center;
-    width: 100%;
+    width: 80%;
     height: 100vh;
 }
 
@@ -79,27 +87,18 @@ aside {
     border: 4px solid #ebeff0;
     border-radius: 20px;
     padding: 1em;
+
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 500px;
 }
 
-.selecionar-cientista {
-    /* padding: 1em; */
-    margin-top: 1em;
-    text-align: left;
-}
-
-.selecionar-retorno {
-    text-align: left;
-    margin-top: 1em;
-}
-
-.section-alteracao {
-    margin-top: 1em;
-    text-align: left;
-}
-
+.selecionar-cientista,
+.selecionar-retorno,
+.section-alteracao,
 .section-deletar {
-    margin-top: 1em;
-    text-align: left;
+    margin-top: 2em;
+    text-align: justify;
 }
 
 #divNome,
@@ -136,7 +135,7 @@ aside {
     color: #333;
     width: 120px;
     /* Ajuste a largura conforme necessário */
-    height: 25px;
+    height: 30px;
     /* Ajuste a altura conforme necessário */
     box-sizing: border-box;
     margin: 0;
@@ -211,5 +210,12 @@ aside {
 
     50% {
         border-color: #d19a02dc;
+    }
+}
+
+/* Média query */
+@media screen and (max-width: 1024px) {
+    aside {
+        flex-direction: column;
     }
 }
