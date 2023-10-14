@@ -262,39 +262,20 @@ function alterarAtributo(): Cientistas[] {
 
 /**
  * Função responsável por excluir um atributo selecionado pelo usuário da lista de Cientistas.
- * @returns array de objetos com os atributos mantidos e o excluído.
+ * @returns array de objetos com os atributos atualizados
  */
 function excluirAtributo(): Cientistas[] {
     // Obtém o elemento de seleção de cientistas e de opção de exclusão do HTML
     const idCientista: HTMLSelectElement | null = document.getElementById("cientistas") as HTMLSelectElement;
-    const opcaoDeletar: HTMLSelectElement | null = document.getElementById("opcaoDeletar") as HTMLSelectElement;
     const id: number = parseInt(idCientista.value);
 
-    // Chama a função para excluir um item da lista com base no ID e mantém a lista atualizada
-    const deletar: Cientistas[] = apagarItemLista(id, lista);
+    // Chama a função para excluir um objeto com base no ID e mantém a lista atualizada
+    const listaAtualizada: Cientistas[] = funcionalApagarItemLista(id, lista);
+    idCientista.remove(idCientista.selectedIndex);
 
-    // Verifica a opção de exclusão selecionada e executa a exclusão apropriada
-    if (opcaoDeletar) {
-        switch (parseInt(opcaoDeletar.value)) {
-            case 1:
-                deletar[0].name = '';
-                break;
-            case 2:
-                deletar[0].bio = '';
-                break;
-            default:
-                break;
-        }
-    }
+    limparElementos();
 
-    // Obtém os elementos do HTML relacionados às informações excluídas e atualiza
-    const infoExcluida: HTMLElement | null = document.getElementById("infoExcluida");
-    if (infoExcluida) infoExcluida.innerHTML = JSON.stringify(deletar);
-
-    const divInfoExcluida: HTMLDivElement | null = document.getElementById("div-infoExcluida") as HTMLDivElement;
-    if (divInfoExcluida) divInfoExcluida.style.display = "block";
-
-    return deletar;
+    return listaAtualizada;
 }
 
 /**
@@ -303,4 +284,15 @@ function excluirAtributo(): Cientistas[] {
 function scrollToSection(): void {
     var section = document.querySelector('.section-leitura') as HTMLElement;
     section.scrollIntoView({ behavior: 'smooth' });
+}
+
+/**
+ * Oculta os elementos de conteúdo de campos específicos
+ */
+function limparElementos(): void {
+    const divNome: HTMLDivElement | null = document.getElementById("divNome") as HTMLDivElement;
+    const divBiografia: HTMLDivElement | null = document.getElementById("divBiografia") as HTMLDivElement;
+
+    divNome.style.display = "none";
+    divBiografia.style.display = "none";
 }

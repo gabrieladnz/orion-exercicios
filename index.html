@@ -60,8 +60,13 @@
             <div id="divBiografia" style="display: none;">Biografia:
                 <strong><label id="biografia"></label></strong>
             </div>
-            <div>
-                <button type="button" id="bt-consulta" onclick="mostrarInfo()">Consultar</button>
+            <div style="display: flex; justify-content: flex-start;">
+                <div>
+                    <button type="button" id="bt-consulta" onclick="mostrarInfo()">Consultar</button>
+                </div>
+                <div>
+                    <button id="bt-excluir" type="button" onclick="excluirAtributo()">Excluir</button>
+                </div>
             </div>
             <section class="section-alteracao">
                 <div class="alterar-atributo">
@@ -90,26 +95,6 @@
 
                 <div>
                     <button id="bt-alterar" type="button" onclick="alterarAtributo()">Alterar</button>
-                </div>
-            </section>
-
-            <section class="section-deletar">
-                <div class="deletar-atributo">
-                    <label>Excluir informação: </label>
-                    <select id="opcaoDeletar">
-                        <option value="0">Selecione</option>
-                        <option value="1">Nome</option>
-                        <option value="2">Biografia</option>
-                    </select>
-                </div>
-
-                <div id="div-infoExcluida" style="display: none;">
-                    <strong>
-                        <label id="infoExcluida">Informações excluídas: </label>
-                    </strong>
-                </div>
-                <div>
-                    <button id="bt-excluir" type="button" onclick="excluirAtributo()">Excluir</button>
                 </div>
             </section>
         </section>
